@@ -46,12 +46,12 @@
             "Type"        : "AWS::EC2::KeyPair::KeyName",
             "ConstraintDescription" : "must be the name of an existing EC2 KeyPair."
         },
-        "VpcId"        : {
+        "VPC-Id"        : {
             "Description" : "The VPC Id where the EC2 instances will be launched.",
             "Type"        : "AWS::EC2::VPC::Id",
             "ConstraintDescription" : "must be the name of an existing VPC."
         },
-        "YourIPRange"  : {
+        "CIDR-Range"  : {
             "Description" : "CIDR block of the network from where you will connect to the Jenkins server using HTTP and SSH",
             "Type"        : "String",
             "MinLength"   : "9",
@@ -394,7 +394,7 @@
             "Properties" : {
                 "GroupDescription" : "Enable SSH and HTTP access from specific CIDR block",
                 "VpcId"            : {
-                    "Ref" : "VpcId"
+                    "Ref" : "VPC-Id"
                 },
                 "SecurityGroupIngress" : [
                     {
@@ -402,7 +402,7 @@
                         "FromPort"   : "22",
                         "ToPort"     : "22",
                         "CidrIp"     : {
-                            "Ref" : "YourIPRange"
+                            "Ref" : "CIDR-Range"
                         }
                     },
                     {
@@ -410,7 +410,7 @@
                         "FromPort"   : "80",
                         "ToPort"     : "80",
                         "CidrIp"     : {
-                            "Ref" : "YourIPRange"
+                            "Ref" : "CIDR-Range"
                         }
                     }
                 ]
